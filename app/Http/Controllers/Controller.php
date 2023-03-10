@@ -18,21 +18,21 @@ class Controller extends BaseController
             'mote' => 'required | unique:users',
             'name' => 'required',
             'lastname' => 'required',
-            'date',
-            'centro',
+            'date' => 'nullable',
+            'centro' => 'nullable',
             'email' => 'required | email | unique:users',
             'password' => 'required',
-            'img',
-            'role',
+            'img' => 'nullable',
+            'role' => 'nullable',
         ]);
 
         $user = new User();
-        if($request->hasFile('img')){
-            $file= $request->file('img');
-            $destinationpath='img/';
-            $filname = time().'-'.$file->getClientOriginalName();
-            $uploadsuccess= $request->file('img')->move($destinationpath,$filname);
-            $user->img = $destinationpath.$filname;
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $destinationpath = 'img/';
+            $filname = time() . '-' . $file->getClientOriginalName();
+            $uploadsuccess = $request->file('img')->move($destinationpath, $filname);
+            $user->img = $destinationpath . $filname;
         }
         $user->mote = $request->mote;
         $user->name = $request->name;
@@ -51,10 +51,12 @@ class Controller extends BaseController
         }
         $user->save();
         // Auth::login($user);
+        $token = $user->createToken("auth_token")->plainTextToken;
         return response()->json([
             "status" => 1,
             'message' => 'Successfully created user!',
-            "value" => $user
+            "value" => $user,
+            "access_token" => $token
         ]);
     }
     public function login(Request $request)
@@ -71,7 +73,6 @@ class Controller extends BaseController
                     $user,
                     $token
                 ]);
-
             } else {
                 return response()->json(
                     "Password_bad"
@@ -120,5 +121,11 @@ class Controller extends BaseController
             ]);
         }*/
     }
-
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json()([
+            "Has cerrado la sesión"
+        ]);
+    }
 }
