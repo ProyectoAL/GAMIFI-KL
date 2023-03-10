@@ -18,8 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::post("signup", [Controller::class, "signup"]);
 Route::post("login", [Controller::class, "login"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    Route::put("update/{id}", [Controller::class, "update"]);
-    return $request->user();
-});
-
+Route::middleware('auth:sanctum')->put("update/{id}", [Controller::class, "update"]);
