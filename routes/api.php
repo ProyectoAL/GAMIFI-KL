@@ -39,5 +39,5 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::post("indexa/{mote}",[UniteRankingController::class,"indexa"]);
     Route::post("indexall/{codigo}",[UniteRankingController::class,"indexall"]);
-    Route::post("unitedranking/{mote},{codigo}",[UniteRankingController::class,"unitedranking"]);
+    Route::post("unitedranking/{id_usuario},{codigo}",[UniteRankingController::class,"unitedranking"]);
 });

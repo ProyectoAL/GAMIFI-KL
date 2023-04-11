@@ -13,18 +13,21 @@ class UniteRankingController extends Controller
         $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND users.mote='$mote';";
+                AND users.mote='$request->mote';";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
-    public function indexall(Request $request,$codigo){
-        $sql2 = "SELECT users.mote, unite_rankings.puntos
+
+    public function indexall(Request $request, $codigo)
+    {
+        $sql2 = "SELECT users.mote, users.name, users.lastname, unite_rankings.puntos, unite_rankings.codigo
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND unite_rankings.codigo= '$codigo';";
-        $viewranking=DB::select($sql2);
+                AND unite_rankings.codigo= '$request->codigo';";
+        $viewranking = DB::select($sql2);
         return $viewranking;
     }
+
     public function unitedranking(Request $request)
     {
         $request->validate([
