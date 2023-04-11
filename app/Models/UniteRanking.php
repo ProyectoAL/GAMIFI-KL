@@ -12,6 +12,6 @@ class UniteRanking extends Model
     protected $fillable = [
         'codigo',
         'puntos',
-        'id_usuario'
+        'mote_usuario'
     ];
 }
