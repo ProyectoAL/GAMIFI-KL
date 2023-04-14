@@ -10,10 +10,11 @@ class UniteRankingController extends Controller
 {
     public function indexa(Request $request, $mote)
     {
-        $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos
-                FROM users, unite_rankings
+        $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos, create_rankings.nombre
+                FROM users, unite_rankings, create_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND users.mote='$request->mote';";
+                AND users.mote='$request->mote' 
+                AND unite_rankings.codigo=create_rankings.codigo;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
