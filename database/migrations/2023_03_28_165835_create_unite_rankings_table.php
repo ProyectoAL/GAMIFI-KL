@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('unite_rankings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_ranking')->references('id')->on('create_rankings');
             $table->string('codigo');
-            $table->bigInteger('puntos')->default(0);
+            $table->string('puntos');
             $table->foreignId('id_usuario')->references('id')->on('users');
         });
     }
