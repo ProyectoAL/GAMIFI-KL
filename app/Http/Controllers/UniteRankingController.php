@@ -76,11 +76,24 @@ class UniteRankingController extends Controller
             ]);
         }
     }
-    public function deleterankingu(Request $request, $id)
-    {
-        //UniteRanking::destroy($request->id);
-        $sql = "Delete * FROM create_rankings where id_usuario = $id";
-        $CreateRanking = DB::select($sql);
-        return $CreateRanking;
+    public function deleteuser($id) {
+        $sql = "DELETE FROM unite_rankings
+                WHERE EXISTS (SELECT users.id, unite_rankings.id_usuario
+                FROM unite_rankings, users
+                WHERE users.id=unite_rankings.id_usuario
+                AND users.id=$id);";
+        $CreateRanking = DB::select($sql,);
+        return response()->json([
+            "status" => 0,
+            'message' => 'User Successfully delete',
+            "value" => $CreateRanking,
+        ]);
+    }
+    public function deleterankingu(Request $request,$id){
+        UniteRanking::destroy($request->id);
+        return response()->json([
+            "status" => 0,
+            'message' => 'Ranking Successfully delete',
+        ]);
     }
 }
