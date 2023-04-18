@@ -40,10 +40,9 @@ class CreateRankingController extends Controller
             "value" => $CreateRanking
         ]);
     }
-    public function updateranking(Request $request, $id){
+    public function updaterankingcode(Request $request, $id){
         $request->validate([
             'codigo' => '',
-            'nombre'=>'',
         ]);
         $UpdateRanking = $id;
         if (CreateRanking::where(["id" => $UpdateRanking])->exists()) {
@@ -54,7 +53,6 @@ class CreateRankingController extends Controller
             }else{
 
             }
-            $UpdateRanking->nombre=$request->nombre;
             $UpdateRanking->save();
             return response()->json([
                 "status" => 1,
@@ -67,6 +65,23 @@ class CreateRankingController extends Controller
                 "message" => "No se pùdo actucalizar",
             ]);
         }
+    }
+    public function updateranking(Request $request ,$id){
+        $request->validate([
+            'codigo'=>'',
+        ]);
+        $updateRanking = new CreateRanking();
+        $updateRanking->codigo=$request->codigo;
+
+        $sql2 ="UPDATE unite_rankings
+                SET codigo = '$request->codigo'
+                WHERE unite_rankings.id_usuario = $request->id";
+        $updateRanking2 = DB::select($sql2);
+        return response()->json([
+            "status" => 1,
+            "message" => "Actualizado correctamente",
+            "Value" => $updateRanking2
+        ]);
     }
     public function deleteranking(Request $request){
         CreateRanking::destroy($request->id);
