@@ -34,7 +34,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("indexranking/{mote}",[CreateRankingController::class,"indexranking"]);
     Route::post("Createranking",[CreateRankingController::class, "Createranking"]);
     Route::put("updateranking/{id}",[CreateRankingController::class, "updateranking"]);
-    Route::delete("deleteranking",[CreateRankingController::class, "Deleteranking"]);
+    Route::post("deleteuser/",[UniteRankingController::class,"deleteuser"]);
+    Route::post("deleterankingu/{id}",[UniteRankingController::class,"deleterankingu"]);
 
 
     Route::post("indexa/{mote}",[UniteRankingController::class,"indexa"]);
