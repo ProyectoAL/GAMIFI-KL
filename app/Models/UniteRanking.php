@@ -10,8 +10,9 @@ class UniteRanking extends Model
     use HasFactory;
     public $timestamps=false;
     protected $fillable = [
+        'id_ranking',
         'codigo',
         'puntos',
-        'mote_usuario'
+        'id_usuario'
     ];
 }
