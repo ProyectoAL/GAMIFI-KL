@@ -29,11 +29,13 @@ class UniteRankingController extends Controller
             'codigo'=>'',
             'id_usuario'=>'required',
         ]);
+        
+        $createRanking = CreateRanking::where('codigo', $request->codigo)->first();
+
         $UniteRanking = new UniteRanking();
-        $UniteRanking->id_ranking=$request->id_ranking;
-        $UniteRanking->codigo=$request->codigo;
-        $UniteRanking->puntos=$request->puntos;
-        $UniteRanking->id_usuario=$request->id_usuario;
+        $UniteRanking->id_ranking = $createRanking->id;
+        $UniteRanking->codigo = $request->codigo;
+        $UniteRanking->id_usuario = $request->id_usuario;
 
         $sql="SELECT codigo
                 FROM create_rankings
