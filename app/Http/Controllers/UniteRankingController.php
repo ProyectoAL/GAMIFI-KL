@@ -69,13 +69,12 @@ class UniteRankingController extends Controller
             ]);
         }
     }
-    public function deleteuser(Request $request) {
-        $sql = "DELETE FROM unite_rankings
-                WHERE EXISTS (SELECT users.id, unite_rankings.id_usuario
-                FROM unite_rankings, users
-                WHERE users.id=unite_rankings.id_usuario
-                AND users.id=$request->id);";
-        $CreateRanking = DB::select($sql,);
+    public function deleteuser(Request $request)
+    {
+
+        $CreateRanking = DB::table('unite_rankings')
+            ->where('id_usuario', '=', $request->id)
+            ->delete();
         return response()->json([
             "status" => 0,
             'message' => 'User Successfully delete',
