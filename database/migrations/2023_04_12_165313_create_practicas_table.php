@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('practicas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_profesor')->references('id')->on('users')->nullable();
+            $table->foreignId('id_ranking')->references('id')->on('create_rankings');
             $table->string('codigo');
             $table->string('nombre')->nullable();
             $table->longText('descripcion');
-            $table->string('puntuacion');
         });
     }
 
