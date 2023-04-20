@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class practica extends Model
+class entrega extends Model
 {
     use HasFactory;
     public $timestamps=false;
     protected $fillable = [
-        'id_ranking',
-        'id_profesor',
-        'codigo',
-        'nombre',
-        'descripcion'
+        'id_usuario',
+        'entrega',
+        'nota',
+        'id_practicas'
     ];
 }

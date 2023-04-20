@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CreateRanking extends Model
 {
     use HasFactory;
+    protected $table = 'create_rankings';
     public $timestamps=false;
     protected $fillable = [
         'codigo',
