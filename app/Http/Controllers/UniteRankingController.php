@@ -26,7 +26,7 @@ class UniteRankingController extends Controller
         $sql2 = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos, unite_rankings.codigo
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND unite_rankings.codigo= '$request->codigo' ORDER BY puntos ASC;";
+                AND unite_rankings.codigo= '$request->codigo' ORDER BY puntos DESC;";
         $viewranking = DB::select($sql2);
         return $viewranking;
     }
