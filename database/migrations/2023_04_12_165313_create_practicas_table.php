@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('codigo');
             $table->string('nombre')->nullable();
             $table->longText('descripcion');
+            $table->string('puntuacion');
         });
     }
 

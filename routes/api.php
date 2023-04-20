@@ -7,6 +7,8 @@ use App\Http\Controllers\RankingController;
 use App\Http\Controllers\UniteRankingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PracticaController;
+use App\Http\Controllers\EntregaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::put("updatePhoto/{id}", [Controller::class, "updatePhoto"]);
     Route::get("logout", [Controller::class, "logout"]);
     Route::get("userporfolio/{id}", [Controller::class, "userporfolio"]);
-
+    
 
     Route::post("indexranking/{mote}",[CreateRankingController::class,"indexranking"]);
     Route::post("Createranking",[CreateRankingController::class, "Createranking"]);
@@ -47,6 +49,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::post("createp",[PracticaController::class,"createp"]);
     Route::post("indexpractica/{codigo}",[PracticaController::class,"indexpractica"]);
+    Route::post("deletep/{id}", [PracticaController::class, "deletep"]);
 
     Route::post("entrega",[EntregaController::class,"entrega"]);
     Route::put("actualizarnota/{id}",[EntregaController::class,"actualizarnota"]);

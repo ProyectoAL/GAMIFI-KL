@@ -78,10 +78,10 @@ class CreateRankingController extends Controller
 
         $sql = "UPDATE unite_rankings
                 SET codigo = '$request->codigo'
-                WHERE unite_rankings.id_usuario = $request->id_usuario AND unite_rankings.id_ranking=$request->id_ranking;";
+                WHERE unite_rankings.id_ranking=$request->id_ranking;";
         $sql2 ="UPDATE practicas
                 SET codigo = '$request->codigo'
-                WHERE practicas.id_ranking = $request->id_usuario AND practicas.id_profesor = $request->id_ranking;";
+                WHERE practicas.id_ranking = $request->id_ranking AND practicas.id_profesor = $request->id_usuario;";
 
         $updateRanking = DB::select($sql);
         $updateRanking2 = DB::select($sql2);

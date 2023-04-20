@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_ranking')->references('id')->on('create_rankings');
             $table->string('codigo');
-            $table->string('puntos');
+            $table->string('puntos')->default(0);
             $table->foreignId('id_usuario')->references('id')->on('users');
         });
     }

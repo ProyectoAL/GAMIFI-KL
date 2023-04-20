@@ -22,10 +22,10 @@ class PracticaController extends Controller
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }*/
-    public function indexpractica(Request $request){
-        $sql = "SELECT id_profesor, codigo, nombre, descripcion, puntuacion
+    public function indexpractica($codigo){
+        $sql = "SELECT id, id_profesor, codigo, nombre, descripcion, puntuacion
                 FROM practicas
-                WHERE codigo = '$request->codigo';";
+                WHERE codigo = '$codigo';";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
@@ -38,9 +38,11 @@ class PracticaController extends Controller
         ]);
         $createpractica = new practica();
         $createpractica->id_profesor=$request->id_profesor;
+        $createpractica->id_ranking=$request->id_ranking;
         $createpractica->codigo=$request->codigo;
         $createpractica->nombre=$request->nombre;
         $createpractica->descripcion=$request->descripcion;
+        $createpractica->puntuacion = $request->puntuacion;
         $createpractica->save();
         return response()->json([
             "status" => 1,
