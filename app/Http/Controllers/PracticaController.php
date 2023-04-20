@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class PracticaController extends Controller
 {
-    public function indexall (){
+    public function indexall (Request $request){
         $sql = "SELECT users.lastname, users.date, practicas.descripcion, practicas.codigo
                 FROM users, practicas
                 WHERE users.id=practicas.id_profesor
-                AND users.id=1;";
+                AND users.id=$request->id;";
     }
     /*public function indexPP (){
         $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos
@@ -22,20 +22,25 @@ class PracticaController extends Controller
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }*/
+    public function indexpractica(Request $request){
+        $sql = "SELECT id_profesor, codigo, nombre, descripcion, puntuacion
+                FROM practicas
+                WHERE codigo = '$request->codigo';";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
     public function createp (Request $request){
         $request->validate([
             'id_profesor'=>'',
             'codigo'=>'',
             'nombre'=>'',
             'descripcion'=>'',
-            'puntuacion'=>'',
         ]);
         $createpractica = new practica();
         $createpractica->id_profesor=$request->id_profesor;
         $createpractica->codigo=$request->codigo;
         $createpractica->nombre=$request->nombre;
         $createpractica->descripcion=$request->descripcion;
-        $createpractica->puntuacion=$request->puntuacion;
         $createpractica->save();
         return response()->json([
             "status" => 1,

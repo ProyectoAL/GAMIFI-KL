@@ -40,7 +40,7 @@ class CreateRankingController extends Controller
             "value" => $CreateRanking
         ]);
     }
-    public function updaterankingcode(Request $request, $id){
+    public function updaterankingcode(Request $request, $id){//Genera un nuevo codigo
         $request->validate([
             'codigo' => '',
         ]);
@@ -66,21 +66,30 @@ class CreateRankingController extends Controller
             ]);
         }
     }
-    public function updateranking(Request $request ,$id){
+
+
+    //faltapor terminar
+    public function updateranking(Request $request){//Actualiza los codigos del ranquing
         $request->validate([
             'codigo'=>'',
         ]);
         $updateRanking = new CreateRanking();
         $updateRanking->codigo=$request->codigo;
 
-        $sql2 ="UPDATE unite_rankings
+        $sql = "UPDATE unite_rankings
                 SET codigo = '$request->codigo'
-                WHERE unite_rankings.id_usuario = $request->id";
+                WHERE unite_rankings.id_usuario = $request->id_usuario AND unite_rankings.id_ranking=$request->id_ranking;";
+        $sql2 ="UPDATE practicas
+                SET codigo = '$request->codigo'
+                WHERE practicas.id_ranking = $request->id_usuario AND practicas.id_profesor = $request->id_ranking;";
+
+        $updateRanking = DB::select($sql);
         $updateRanking2 = DB::select($sql2);
         return response()->json([
             "status" => 1,
             "message" => "Actualizado correctamente",
-            "Value" => $updateRanking2
+            "Value" => $updateRanking,
+            "Value2" => $updateRanking2,
         ]);
     }
     public function deleteranking(Request $request){

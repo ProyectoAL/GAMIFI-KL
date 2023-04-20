@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UniteRanking;
 use Illuminate\Http\Request;
+use App\Models\CreateRanking;
 use Illuminate\Support\Facades\DB;
 
 class UniteRankingController extends Controller
@@ -12,7 +13,7 @@ class UniteRankingController extends Controller
         $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND users.mote='$mote';";
+                AND users.mote='$request->mote';";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
@@ -24,19 +25,19 @@ class UniteRankingController extends Controller
         $viewranking=DB::select($sql2);
         return $viewranking;
     }
+    //falta por terminar
     public function unitedranking(Request $request,$mote,$codigo){
         $request->validate([
             'codigo'=>'',
             'id_usuario'=>'required',
         ]);
-        
         $createRanking = CreateRanking::where('codigo', $request->codigo)->first();
 
         $UniteRanking = new UniteRanking();
         $UniteRanking->id_ranking = $createRanking->id;
         $UniteRanking->codigo = $request->codigo;
+        $UniteRanking->puntos=$request->puntos;
         $UniteRanking->id_usuario = $request->id_usuario;
-
         $sql="SELECT codigo
                 FROM create_rankings
                 WHERE codigo = '$codigo';";
@@ -69,12 +70,13 @@ class UniteRankingController extends Controller
             ]);
         }
     }
-    public function deleteuser(Request $request)
-    {
-
-        $CreateRanking = DB::table('unite_rankings')
-            ->where('id_usuario', '=', $request->id)
-            ->delete();
+    public function deleteuser(Request $request) {
+        $sql = "DELETE FROM unite_rankings
+                WHERE EXISTS (SELECT users.id, unite_rankings.id_usuario
+                FROM unite_rankings, users
+                WHERE users.id=unite_rankings.id_usuario
+                AND users.id=$request->id);";
+        $CreateRanking = DB::select($sql,);
         return response()->json([
             "status" => 0,
             'message' => 'User Successfully delete',
