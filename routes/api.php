@@ -33,12 +33,22 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::post("indexranking/{mote}",[CreateRankingController::class,"indexranking"]);
     Route::post("Createranking",[CreateRankingController::class, "Createranking"]);
-    Route::put("updateranking/{id}",[CreateRankingController::class, "updateranking"]);
-    Route::post("deleteuser/",[UniteRankingController::class,"deleteuser"]);
-    Route::post("deleterankingu/{id}",[UniteRankingController::class,"deleterankingu"]);
+    Route::post("updateranking/{id_usuario},{id_ranking}",[CreateRankingController::class, "updateranking"]);
+    Route::put("updaterankingcode/{id}",[CreateRankingController::class, "updaterankingcode"]);
+    Route::delete("deleteranking",[CreateRankingController::class, "Deleteranking"]);
 
 
     Route::post("indexa/{mote}",[UniteRankingController::class,"indexa"]);
     Route::post("indexall/{codigo}",[UniteRankingController::class,"indexall"]);
-    Route::post("unitedranking/{id_usuario},{codigo}",[UniteRankingController::class,"unitedranking"]);
+    Route::post("unitedranking/{mote},{codigo}",[UniteRankingController::class,"unitedranking"]);
+    Route::post("deleteuser/",[UniteRankingController::class,"deleteuser"]);
+    Route::post("deleterankingu/{id}",[UniteRankingController::class,"deleterankingu"]);
+
+
+    Route::post("createp",[PracticaController::class,"createp"]);
+    Route::post("indexpractica/{codigo}",[PracticaController::class,"indexpractica"]);
+
+    Route::post("entrega",[EntregaController::class,"entrega"]);
+    Route::put("actualizarnota/{id}",[EntregaController::class,"actualizarnota"]);
+    Route::delete("deleteentrega/{id}",[EntregaController::class,"deleteentrega"]);
 });
