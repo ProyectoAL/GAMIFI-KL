@@ -8,13 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class EntregaController extends Controller
 {
-    public function indexentrega(){
-
+    public function indexentrega(Request $request){//Los usuarios podran ver las practicas del ranking
+        $sql = "SELECT id, id_usuario, entrega, nota, id_practicas
+        FROM entregas
+        WHERE id_usuario = $request->id_usuario AND id_practicas = $request->id_practicas;";
+        $updateRanking = DB::select($sql);
+        return response()->json([
+            "status" => 1,
+            "message" => "Todos los rakings unidos",
+            "Value" => $updateRanking
+        ]);
     }
-    public function entrega (Request $request){
+    public function entrega (Request $request){//los usuarios entregaran los actividades dependiendo del ranking
         $request->validate([
         'id_usuario' => '',
-        'entrega' => '',
+        'entrega' => 'Required | file',
         'nota' => '',
         'id_practicas' => '',
         ]);
@@ -28,6 +36,22 @@ class EntregaController extends Controller
             "status" => 1,
             'message' => 'Successfully',
             "value" => $entrega
+        ]);
+    }
+    public function actualizarentrega(Request $request){
+        $request->validate([
+            'entrega'=>'',
+        ]);
+        $updateentrega = new entrega();
+        $updateentrega->nota=$request->entrega;
+        $sql = "UPDATE entregas
+        SET entrega = '$request->entrega'
+        WHERE id_usuario = $request->id_usuario;";
+        $UpdateRanking = DB::select($sql);
+        return response()->json([
+            "status" => 1,
+            "message" => "Actualizado correctamente la entrega",
+            "Value" => $UpdateRanking,
         ]);
     }
     public function actualizarnota(Request $request){
