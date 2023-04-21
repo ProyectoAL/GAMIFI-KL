@@ -52,6 +52,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("deletep/{id}", [PracticaController::class, "deletep"]);
 
     Route::post("entrega",[EntregaController::class,"entrega"]);
+    Route::post("actualizarentrega/{id}",[EntregaController::class,"actualizarentregaarent"]);
     Route::put("actualizarnota/{id}",[EntregaController::class,"actualizarnota"]);
     Route::delete("deleteentrega/{id}",[EntregaController::class,"deleteentrega"]);
 });
