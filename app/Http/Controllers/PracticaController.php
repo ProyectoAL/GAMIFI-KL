@@ -53,7 +53,20 @@ class PracticaController extends Controller
     public function updatep (){
 
     }
-    public function deletep (Request $request){
-        practica::destroy($request->id);
+        public function deletep (Request $request,$id){//elimina la practica
+        $idpracticas = $id;
+        $sql = "DELETE FROM practicas
+                WHERE id = $idpracticas;";
+        $sql2 = "DELETE FROM entregas
+                WHERE id_practicas = $idpracticas;";
+        $deletep2 = DB::select($sql2);
+        $deletep = DB::select($sql);
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Actualizado correctamente",
+            "Value" => $deletep,
+            "Value"=>$deletep2,
+        ]);
     }
 }
