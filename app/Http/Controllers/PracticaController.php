@@ -28,7 +28,7 @@ class PracticaController extends Controller
     {
         $sql = "SELECT id, id_ranking, id_profesor, codigo, nombre, descripcion, puntuacion
                 FROM practicas
-                WHERE id = $id;";
+                WHERE id_ranking = $id;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
@@ -42,6 +42,17 @@ class PracticaController extends Controller
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
+
+    public function practicanombre($id, $id_ranking)
+    {
+        $sql = "SELECT nombre
+                FROM practicas
+                WHERE id_ranking = $id_ranking
+                AND id = $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+ 
 
     public function createp(Request $request)
     {

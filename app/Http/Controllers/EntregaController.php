@@ -75,7 +75,8 @@ class EntregaController extends Controller
         $updateentrega->nota = $request->nota;
         $sql = "UPDATE entregas
         SET nota = '$request->nota'
-        WHERE id_usuario = $request->id_usuario;";
+        WHERE id = $request->id;";
+        
         $UpdateRanking = DB::select($sql);
         return response()->json([
             "status" => 1,

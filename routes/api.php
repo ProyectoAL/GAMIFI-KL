@@ -50,6 +50,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("createp", [PracticaController::class, "createp"]);
     Route::get("indexpractica/{id}", [PracticaController::class, "indexpractica"]);
     Route::get("indexindividual/{id},{id_ranking}", [PracticaController::class, "indexindividual"]);
+    Route::get("practicanombre/{id},{id_ranking}", [PracticaController::class, "practicanombre"]);
     Route::post("deletep/{id}", [PracticaController::class, "deletep"]);
 
     Route::get("indexentrega/{id}", [EntregaController::class, "indexentrega"]);
