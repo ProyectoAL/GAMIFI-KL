@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class CreateRankingController extends Controller
 {
-    public function indexranking(Request $request,$mote){
+    public function indexranking(Request $request, $mote)
+    {
         //$CreateRanking=CreateRanking::all();
         $sql = "SELECT users.id, users.mote, create_rankings.id, create_rankings.codigo, create_rankings.nombre, create_rankings.id_profesor
                 FROM users, create_rankings
@@ -18,20 +19,32 @@ class CreateRankingController extends Controller
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
-    public function Createranking(Request $request){
+
+    public function index($id)
+    {
+        //$CreateRanking=CreateRanking::all();
+        $sql = "SELECT id, nombre
+                FROM create_rankings
+                WHERE id= $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+
+
+    public function Createranking(Request $request)
+    {
         $request->validate([
-            'codigo'=>'',
-            'nombre'=>'required',
-            'id_profesor'=>'required',
+            'codigo' => '',
+            'nombre' => 'required',
+            'id_profesor' => 'required',
         ]);
         $CreateRanking = new CreateRanking;
-        $CreateRanking->codigo=$request->codigo;
-        $CreateRanking->nombre=$request->nombre;
-        $CreateRanking->id_profesor=$request->id_profesor;
-        if(empty($CreateRanking->codigo)){
-            $CreateRanking->codigo=Str::random(10);
-        }else{
-
+        $CreateRanking->codigo = $request->codigo;
+        $CreateRanking->nombre = $request->nombre;
+        $CreateRanking->id_profesor = $request->id_profesor;
+        if (empty($CreateRanking->codigo)) {
+            $CreateRanking->codigo = Str::random(10);
+        } else {
         }
         $CreateRanking->save();
         return response()->json([
@@ -40,18 +53,18 @@ class CreateRankingController extends Controller
             "value" => $CreateRanking
         ]);
     }
-    public function updaterankingcode(Request $request, $id){//Genera un nuevo codigo
+    public function updaterankingcode(Request $request, $id)
+    { //Genera un nuevo codigo
         $request->validate([
             'codigo' => '',
         ]);
         $UpdateRanking = $id;
         if (CreateRanking::where(["id" => $UpdateRanking])->exists()) {
             $UpdateRanking = CreateRanking::find($UpdateRanking);
-            $UpdateRanking->codigo=$request->codigo;
-            if(empty($UpdateRanking->codigo)){
-                $UpdateRanking->codigo=Str::random(10);
-            }else{
-
+            $UpdateRanking->codigo = $request->codigo;
+            if (empty($UpdateRanking->codigo)) {
+                $UpdateRanking->codigo = Str::random(10);
+            } else {
             }
             $UpdateRanking->save();
             return response()->json([
@@ -69,17 +82,18 @@ class CreateRankingController extends Controller
 
 
     //faltapor terminar
-    public function updateranking(Request $request){//Actualiza los codigos del ranquing
+    public function updateranking(Request $request)
+    { //Actualiza los codigos del ranquing
         $request->validate([
-            'codigo'=>'',
+            'codigo' => '',
         ]);
         $updateRanking = new CreateRanking();
-        $updateRanking->codigo=$request->codigo;
+        $updateRanking->codigo = $request->codigo;
 
         $sql = "UPDATE unite_rankings
                 SET codigo = '$request->codigo'
                 WHERE unite_rankings.id_ranking=$request->id_ranking;";
-        $sql2 ="UPDATE practicas
+        $sql2 = "UPDATE practicas
                 SET codigo = '$request->codigo'
                 WHERE practicas.id_ranking = $request->id_ranking AND practicas.id_profesor = $request->id_usuario;";
 
@@ -92,7 +106,30 @@ class CreateRankingController extends Controller
             "Value2" => $updateRanking2,
         ]);
     }
-    public function deleteranking(Request $request){
+
+
+    public function updatenombre(Request $request)
+    { //Actualiza los codigos del ranquing
+        $request->validate([
+            'nombre' => '',
+        ]);
+        $updateRanking = new CreateRanking();
+        $updateRanking->nombre = $request->nombre;
+
+        $sql = "UPDATE create_rankings
+                SET nombre = '$request->nombre'
+                WHERE id = $request->id;";
+
+        $updateRanking = DB::select($sql);
+        return response()->json([
+            "status" => 1,
+            "message" => "Actualizado correctamente",
+            "value" => $updateRanking
+        ]);
+    }
+
+    public function deleteranking(Request $request)
+    {
         CreateRanking::destroy($request->id);
     }
 }

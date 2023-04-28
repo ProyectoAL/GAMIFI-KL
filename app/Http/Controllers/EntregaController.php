@@ -8,29 +8,38 @@ use Illuminate\Support\Facades\DB;
 
 class EntregaController extends Controller
 {
-    public function indexentrega(Request $request){//Los usuarios podran ver las practicas del ranking
-        $sql = "SELECT id, id_usuario, entrega, nota, id_practicas
+    public function indexentrega($id)
+    { //Los usuarios podran ver las practicas del ranking
+        $sql = "SELECT id, id_usuario, mote, nombre, lastname, entrega, nota, id_practicas
         FROM entregas
-        WHERE id_usuario = $request->id_usuario AND id_practicas = $request->id_practicas;";
-        $updateRanking = DB::select($sql);
+        WHERE id_practicas = $id;";
+        $entrega = DB::select($sql);
         return response()->json([
             "status" => 1,
             "message" => "Todos los rakings unidos",
-            "Value" => $updateRanking
+            "Value" => $entrega
         ]);
     }
-    public function entrega (Request $request){//los usuarios entregaran los actividades dependiendo del ranking
+
+    public function entrega(Request $request)
+    {
         $request->validate([
-        'id_usuario' => '',
-        'entrega' => 'Required | file',
-        'nota' => '',
-        'id_practicas' => '',
+            'id_usuario' => '',
+            'entrega' => '',
+            'mote' => '',
+            'nombre' => '',
+            'lastname' => '',
+            'nota' => '',
+            'id_practicas' => '',
         ]);
         $entrega = new entrega();
-        $entrega->id_usuario=$request->id_usuario;
-        $entrega->entrega=$request->entrega;
-        $entrega->nota=$request->nota;
-        $entrega->id_practicas=$request->id_practicas;
+        $entrega->id_usuario = $request->id_usuario;
+        $entrega->entrega = $request->entrega;
+        $entrega->mote = $request->mote;
+        $entrega->nombre = $request->nombre;
+        $entrega->lastname = $request->lastname;
+        $entrega->nota = $request->nota;
+        $entrega->id_practicas = $request->id_practicas;
         $entrega->save();
         return response()->json([
             "status" => 1,
@@ -38,12 +47,14 @@ class EntregaController extends Controller
             "value" => $entrega
         ]);
     }
-    public function actualizarentrega(Request $request){
+
+    public function actualizarentrega(Request $request)
+    {
         $request->validate([
-            'entrega'=>'',
+            'entrega' => '',
         ]);
         $updateentrega = new entrega();
-        $updateentrega->nota=$request->entrega;
+        $updateentrega->nota = $request->entrega;
         $sql = "UPDATE entregas
         SET entrega = '$request->entrega'
         WHERE id_usuario = $request->id_usuario;";
@@ -54,12 +65,14 @@ class EntregaController extends Controller
             "Value" => $UpdateRanking,
         ]);
     }
-    public function actualizarnota(Request $request){
+
+    public function actualizarnota(Request $request)
+    {
         $request->validate([
-            'nota'=>'',
+            'nota' => '',
         ]);
         $updateentrega = new entrega();
-        $updateentrega->nota=$request->nota;
+        $updateentrega->nota = $request->nota;
         $sql = "UPDATE entregas
         SET nota = '$request->nota'
         WHERE id_usuario = $request->id_usuario;";
@@ -70,7 +83,9 @@ class EntregaController extends Controller
             "Value" => $UpdateRanking,
         ]);
     }
-    public function deleteentrega(Request $request){
+
+    public function deleteentrega(Request $request)
+    {
         entrega::destroy($request->id);
         return response()->json([
             "status" => 0,

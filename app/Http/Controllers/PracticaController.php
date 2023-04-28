@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class PracticaController extends Controller
 {
-    public function indexall (Request $request){
+    public function indexall(Request $request)
+    {
         $sql = "SELECT users.lastname, users.date, practicas.descripcion, practicas.codigo
                 FROM users, practicas
                 WHERE users.id=practicas.id_profesor
@@ -22,26 +23,40 @@ class PracticaController extends Controller
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }*/
-    public function indexpractica($codigo){
-        $sql = "SELECT id, id_profesor, codigo, nombre, descripcion, puntuacion
+
+    public function indexpractica($id)
+    {
+        $sql = "SELECT id, id_ranking, id_profesor, codigo, nombre, descripcion, puntuacion
                 FROM practicas
-                WHERE codigo = '$codigo';";
+                WHERE id = $id;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
-    public function createp (Request $request){
+
+    public function indexindividual($id, $id_ranking)
+    {
+        $sql = "SELECT id, id_profesor, codigo, nombre, descripcion, puntuacion
+                FROM practicas
+                WHERE id_ranking = $id_ranking
+                AND id = $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+
+    public function createp(Request $request)
+    {
         $request->validate([
-            'id_profesor'=>'',
-            'codigo'=>'',
-            'nombre'=>'',
-            'descripcion'=>'',
+            'id_profesor' => '',
+            'codigo' => '',
+            'nombre' => '',
+            'descripcion' => '',
         ]);
         $createpractica = new practica();
-        $createpractica->id_profesor=$request->id_profesor;
-        $createpractica->id_ranking=$request->id_ranking;
-        $createpractica->codigo=$request->codigo;
-        $createpractica->nombre=$request->nombre;
-        $createpractica->descripcion=$request->descripcion;
+        $createpractica->id_profesor = $request->id_profesor;
+        $createpractica->id_ranking = $request->id_ranking;
+        $createpractica->codigo = $request->codigo;
+        $createpractica->nombre = $request->nombre;
+        $createpractica->descripcion = $request->descripcion;
         $createpractica->puntuacion = $request->puntuacion;
         $createpractica->save();
         return response()->json([
@@ -50,10 +65,11 @@ class PracticaController extends Controller
             "value" => $createpractica
         ]);
     }
-    public function updatep (){
-
+    public function updatep()
+    {
     }
-        public function deletep (Request $request,$id){//elimina la practica
+    public function deletep(Request $request, $id)
+    { //elimina la practica
         $idpracticas = $id;
         $sql = "DELETE FROM practicas
                 WHERE id = $idpracticas;";
@@ -66,7 +82,7 @@ class PracticaController extends Controller
             "status" => 1,
             "message" => "Actualizado correctamente",
             "Value" => $deletep,
-            "Value"=>$deletep2,
+            "Value" => $deletep2,
         ]);
     }
 }

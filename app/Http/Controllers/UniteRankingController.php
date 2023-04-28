@@ -9,24 +9,22 @@ use Illuminate\Support\Facades\DB;
 
 class UniteRankingController extends Controller
 {
-    public function indexa(Request $request, $mote)
+    public function indexnombreranking($id)
     {
-        $sql = "SELECT users.id, users.mote, unite_rankings.codigo, unite_rankings.puntos, create_rankings.nombre
-                FROM users, unite_rankings, create_rankings
-                WHERE users.id = unite_rankings.id_usuario
-                AND users.mote='$request->mote' 
-                AND unite_rankings.codigo=create_rankings.codigo;";
+        $sql = "SELECT nombre
+                FROM create_rankings
+                WHERE create_rankings.id = $id;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
 
 
-    public function indexall(Request $request, $codigo)
+    public function indexall($id)
     {
         $sql2 = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos, unite_rankings.codigo
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND unite_rankings.codigo= '$request->codigo' ORDER BY puntos DESC;";
+                AND unite_rankings.id_ranking= $id ORDER BY puntos DESC;";
         $viewranking = DB::select($sql2);
         return $viewranking;
     }
@@ -81,7 +79,7 @@ class UniteRankingController extends Controller
             ]);
         }
     }
-    
+
     public function deleteuser(Request $request)
     {
 
