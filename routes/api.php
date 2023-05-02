@@ -64,4 +64,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("createsoftskill",[SoftSkillsController::class,"createsoftskill"]);
     Route::put("updatesoftskill/{id}",[SoftSkillsController::class,"updatesoftskill"]);
     Route::delete("deletesoftskill/{id}",[SoftSkillsController::class,"deletesoftskill"]);
+    
+    
+    Route::post("indexallmedaalauser",[MedallausuarioController::class,"indexallmedaalauser"]);
+    Route::post("createmedallauser",[MedallausuarioController::class,"createmedallauser"]);
+    Route::put("updatemedallausuario",[MedallausuarioController::class,"updatemedallausuario"]);
+    Route::delete("deletemedallausuario",[MedallausuarioController::class,"deletemedallausuario"]);
 });
