@@ -58,4 +58,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("actualizarentrega/{id}", [EntregaController::class, "actualizarentregaarent"]);
     Route::put("actualizarnota/{id}", [EntregaController::class, "actualizarnota"]);
     Route::delete("deleteentrega/{id}", [EntregaController::class, "deleteentrega"]);
+    
+    
+    Route::post("indexsoftskill",[SoftSkillsController::class,"indexsoftskill"]);
+    Route::post("createsoftskill",[SoftSkillsController::class,"createsoftskill"]);
+    Route::put("updatesoftskill/{id}",[SoftSkillsController::class,"updatesoftskill"]);
+    Route::delete("deletesoftskill/{id}",[SoftSkillsController::class,"deletesoftskill"]);
 });
