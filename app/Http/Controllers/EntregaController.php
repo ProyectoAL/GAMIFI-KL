@@ -21,6 +21,20 @@ class EntregaController extends Controller
         ]);
     }
 
+    public function indexentregaAlumno($id, $id_usuario)
+    { //Los usuarios podran ver las practicas del ranking
+        $sql = "SELECT id, id_usuario, mote, nombre, lastname, entrega, nota, id_practicas
+        FROM entregas
+        WHERE id_practicas = $id 
+        AND id_usuario = $id_usuario;";
+        $entrega = DB::select($sql);
+        return response()->json([
+            "status" => 1,
+            "message" => "Todos los rakings unidos",
+            "Value" => $entrega
+        ]);
+    }
+
     public function entrega(Request $request)
     {
         $request->validate([
@@ -31,6 +45,7 @@ class EntregaController extends Controller
             'lastname' => '',
             'nota' => '',
             'id_practicas' => '',
+            'id_ranking' => ''
         ]);
         $entrega = new entrega();
         $entrega->id_usuario = $request->id_usuario;
@@ -40,6 +55,7 @@ class EntregaController extends Controller
         $entrega->lastname = $request->lastname;
         $entrega->nota = $request->nota;
         $entrega->id_practicas = $request->id_practicas;
+        $entrega->id_ranking = $request->id_ranking;
         $entrega->save();
         return response()->json([
             "status" => 1,
@@ -76,7 +92,7 @@ class EntregaController extends Controller
         $sql = "UPDATE entregas
         SET nota = '$request->nota'
         WHERE id = $request->id;";
-        
+
         $UpdateRanking = DB::select($sql);
         return response()->json([
             "status" => 1,

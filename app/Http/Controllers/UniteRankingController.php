@@ -11,17 +11,17 @@ class UniteRankingController extends Controller
 {
     public function indexnombreranking($id)
     {
-        $sql = "SELECT nombre
-                FROM create_rankings
-                WHERE create_rankings.id = $id;";
+        $sql = "SELECT create_rankings.nombre, unite_rankings.codigo, create_rankings.id
+                FROM create_rankings, unite_rankings
+                WHERE  unite_rankings.id_ranking = create_rankings.id
+                AND unite_rankings.id_usuario = $id;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
 
-
     public function indexall($id)
     {
-        $sql2 = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos, unite_rankings.codigo
+        $sql2 = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos, unite_rankings.codigo, unite_rankings.id_ranking
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
                 AND unite_rankings.id_ranking= $id ORDER BY puntos DESC;";
@@ -83,21 +83,53 @@ class UniteRankingController extends Controller
     public function deleteuser(Request $request)
     {
 
-        $CreateRanking = DB::table('unite_rankings')
-            ->where('id_usuario', '=', $request->id)
-            ->delete();
+        $sql1 = "DELETE FROM entregas
+            WHERE id_usuario = $request->id_usuario 
+            AND id_ranking = $request->id_ranking;";
+
+        $sql2 = "DELETE FROM unite_rankings
+            WHERE id_usuario =  $request->id_usuario
+            AND id_ranking = $request->id_ranking;";
+
+        $deleteentrega = DB::select($sql1);
+        $deleteusuario = DB::select($sql2);
+
         return response()->json([
             "status" => 0,
             'message' => 'User Successfully delete',
-            "value" => $CreateRanking,
+            "value1" => $deleteentrega,
+            "value2" => $deleteusuario
         ]);
     }
 
-    public function deleterankingu(Request $request, $id)
+
+    public function actualizarPuntosSemanales()
     {
-        //UniteRanking::destroy($request->id);
-        $sql = "Delete * FROM create_rankings where id_usuario = $id";
-        $CreateRanking = DB::select($sql);
-        return $CreateRanking;
+        $fechaActual = date('Y-m-d');
+        $fechaInicioSemana = date('Y-m-d', strtotime('monday this week'));
+
+        $ranking = DB::table('unite_rankings')->distinct('id_ranking')->pluck('id_ranking');
+
+        $usuarios = DB::table('unite_rankings')->distinct('id_usuario')->pluck('id_usuario');
+
+        $codigo = DB::table('unite_rankings')->distinct('codigo')->pluck('codigo');
+
+        foreach ($usuarios as $usuario) {
+            $puntosSemanaActual = DB::table('unite_rankings')
+                ->where('id_usuario', $usuario)
+                ->where('created_at', '>=', $fechaInicioSemana)
+                ->sum('puntos');
+
+            $puntosFaltantes = max(0, 1000 - $puntosSemanaActual);
+
+            DB::table('unite_rankings')->insert([
+                'id_ranking' => $ranking,
+                'codigo' => $codigo,
+                'puntos' => $puntosFaltantes,
+                'id_usuario' => $usuario,
+                'created_at' => $fechaActual,
+                'updated_at' => $fechaActual
+            ]);
+        }
     }
 }

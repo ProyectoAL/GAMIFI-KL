@@ -44,7 +44,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("indexall/{id}", [UniteRankingController::class, "indexall"]);
     Route::post("unitedranking/{mote},{codigo}", [UniteRankingController::class, "unitedranking"]);
     Route::post("deleteuser/", [UniteRankingController::class, "deleteuser"]);
-    Route::post("deleterankingu/{id}", [UniteRankingController::class, "deleterankingu"]);
 
 
     Route::post("createp", [PracticaController::class, "createp"]);
@@ -54,12 +53,13 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("deletep/{id}", [PracticaController::class, "deletep"]);
 
     Route::get("indexentrega/{id}", [EntregaController::class, "indexentrega"]);
+    Route::get("indexentregaAlumno/{id},{id_usuario}", [EntregaController::class, "indexentregaAlumno"]);
     Route::post("entrega", [EntregaController::class, "entrega"]);
     Route::post("actualizarentrega/{id}", [EntregaController::class, "actualizarentregaarent"]);
     Route::put("actualizarnota/{id}", [EntregaController::class, "actualizarnota"]);
     Route::delete("deleteentrega/{id}", [EntregaController::class, "deleteentrega"]);
-    
-    
+
+
     Route::post("indexsoftskill",[SoftSkillsController::class,"indexsoftskill"]);
     Route::post("createsoftskill",[SoftSkillsController::class,"createsoftskill"]);
     Route::put("updatesoftskill/{id}",[SoftSkillsController::class,"updatesoftskill"]);

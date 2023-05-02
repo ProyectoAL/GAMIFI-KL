@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('entregas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_usuario')->references('id')->on('users');
-            $table->binary('entrega');
+            $table->string('mote');
+            $table->string('nombre');
+            $table->string('lastname');
+            $table->longText('entrega');
             $table->string('nota');
             $table->foreignId('id_practicas')->references('id')->on('practicas');
+            $table->foreignId('id_ranking')->references('id')->on('create_rankings');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateRankingController extends Controller
         //$CreateRanking=CreateRanking::all();
         $sql = "SELECT users.id, users.mote, create_rankings.id, create_rankings.codigo, create_rankings.nombre, create_rankings.id_profesor
                 FROM users, create_rankings
-                WHERE users.id= create_rankings.id_profesor
+                WHERE users.id = create_rankings.id_profesor
                 AND users.mote='$mote';";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
@@ -130,6 +130,28 @@ class CreateRankingController extends Controller
 
     public function deleteranking(Request $request)
     {
-        CreateRanking::destroy($request->id);
+
+        $sql1 = "DELETE FROM entregas
+            WHERE id_ranking = $request->id_ranking;";
+        $sql2 = "DELETE FROM practicas
+            WHERE id_ranking = $request->id_ranking;";
+        $sql3 = "DELETE FROM unite_rankings
+            WHERE id_ranking = $request->id_ranking;";
+        $sql4 = "DELETE FROM create_rankings
+            WHERE id = $request->id_ranking;";
+
+        $deleteentregas = DB::select($sql1);
+        $deletepracticas = DB::select($sql2);
+        $deleteuniteusers = DB::select($sql3);
+        $deleterankings = DB::select($sql4);
+
+        return response()->json([
+            "status" => 0,
+            'message' => 'User Successfully delete',
+            "value1" => $deleteentregas,
+            "value2" => $deletepracticas,
+            "value3" => $deleteuniteusers,
+            "value4" => $deleterankings
+        ]);
     }
 }
