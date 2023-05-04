@@ -14,10 +14,12 @@ class SoftSkillsController extends Controller
     }
     public function createsoftskill(Request $request){//Poder crear las medallas de los softskill
         $request->validate([
+            'nivel'=>'Required',
             'rango' => 'Required',
             'medalla' => ' image',
             ]);
         $createsoftskill= new Soft_Skills();
+        $createsoftskill->nivel=$request->nivel;
         $createsoftskill->rango= $request->rango;
         $createsoftskill->medalla= $request->medalla;
         $createsoftskill->save();
@@ -37,6 +39,7 @@ class SoftSkillsController extends Controller
         $user_id = $id;
         if (Soft_Skills::where(["id" => $user_id])->exists()) {
             $createsoftskill = Soft_Skills::find($user_id);
+            $createsoftskill->nivel=$request->nivel;
             $createsoftskill->rango= $request->rango;
             $createsoftskill->medalla= $request->medalla;
             $createsoftskill->save();
