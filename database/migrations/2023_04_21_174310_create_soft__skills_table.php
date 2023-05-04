@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('soft__skills', function (Blueprint $table) {
             $table->id();
+            $table->integer('nivel');
             $table->string("rango");
             $table->longText("medalla");
         });
