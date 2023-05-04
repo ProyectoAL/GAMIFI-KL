@@ -10,6 +10,7 @@ class Soft_Skills extends Model
     use HasFactory;
     public $timestamps=false;
     protected $fillable = [
+        'nivel',
         'rango',
         'medalla'
     ];
