@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MedallausuarioController extends Controller
 {
-       public function indexallmedaalauser(){//Muestra todas las medallas de un usuario de un solo ranking
+    public function indexallmedaalauser(){//Muestra todas las medallas de un usuario de un solo ranking
 
     }
     public function createmedallauser(Request $request){//poner medallas a los usuarios
@@ -31,24 +31,25 @@ class MedallausuarioController extends Controller
         $request->validate([
             'id_usuario',
             'id_ranking',
-            'id_medalla'
+            'Responsabilidad',
+            'Cooperación',
+            'Autonomía e iniciativa',
+            'Gestión emocional',
+            'Habilidades de pensamiento'
             ]);
             $user_id = $id;
-        if (medallausuario::where(["id_usuario" => $user_id])->exists()) {
-            $updatemedallausuario = medallausuario::find($user_id);
-            $updatemedallausuario->id_medalla= $request->id_medalla;
-            $updatemedallausuario->save();
-            return response()->json([
-                "status" => 1,
-                "message" => "Actualizado correctamente",
-                "value" => $updatemedallausuario
-            ]);
-        } else {
-            return response()->json([
-                "status" => 1,
-                "message" => "No se pùdo actucalizar",
-            ]);
-        }
+            $sql="Sele ";
+
+    }
+    public  function updatetrigger(Request $request){
+        $trigger="
+        create trigger updatetrigger
+        AFTER INSERT ON nombre_de_la_tabla
+        FOR EACH ROW
+        BEGIN
+            -- Código SQL del trigger
+        END;
+        ";
     }
     public function deletemedallausuario(Request $request){//eliminar las medallas de los usuarios
         medallausuario::destroy($request->id);
