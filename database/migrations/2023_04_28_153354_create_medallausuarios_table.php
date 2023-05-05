@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_usuario')->references('id')->on('users');
             $table->foreignId('id_ranking')->references('id')->on('create_rankings');
-            $table->foreignId('id_medalla')->references('id')->on('soft__skills');
+            $table->foreignId('Responsabilidad')->references('id')->on('soft__skills');
+            $table->foreignId('Cooperación')->references('id')->on('soft__skills');
+            $table->foreignId('Autonomía e iniciativa')->references('id')->on('soft__skills');
+            $table->foreignId('Gestión emocional')->references('id')->on('soft__skills');
+            $table->foreignId('Habilidades de pensamiento')->references('id')->on('soft__skills');
         });
     }
 
