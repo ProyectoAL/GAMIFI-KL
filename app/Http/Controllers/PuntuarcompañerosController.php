@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class PuntuarcompañerosController extends Controller
 {
+    public function indexusermenos($codigo, $mote){//muestra doso los usuarios del ranking que quiera puntuar menos el
+        $primero="SELECT  users.mote, unite_rankings.codigo
+                FROM unite_rankings, users
+                WHERE users.id = unite_rankings.id_usuario
+                AND unite_rankings.codigo='$codigo'
+                AND users.mote <> '$mote';";//mote del usuario logeado
+        $consulta = DB::select($primero);
+        return response()->json([
+
+        ]);
+    }
     //La p al final de los nombres de las funciones son de puntos de cada soft softkill
     public function updateResponsabilidadp(Request $request,$mote,$codigo, $puntosenv,$id_usuario){//Actualizar la puntuacion de la responsabilidad
         //id_alumno->es la id del alumno a puntuar
@@ -32,8 +43,8 @@ class PuntuarcompañerosController extends Controller
                 ]);
             }else{
                 $updatesql="UPDATE unite_rankings
-                            SET Responsabilidad = '140'
-                            WHERE codigo = 'dvwZ0QEucu'
+                            SET Responsabilidad = '$puntosenv'
+                            WHERE codigo = '$codigo'
                             AND id_usuario=$id_usuario;";
                 $consul2 = DB::select($updatesql);
                 return response()->json([
@@ -42,8 +53,6 @@ class PuntuarcompañerosController extends Controller
                 ]);
             }
         }
-
-
     }
     public function updateCooperaciónp(Request $request,$mote, $codigo,$puntosenv,$id_usuario){//Actualiza la puntuacion de la cooperación
         //id_alumno->es la id del alumno a puntuar
@@ -83,7 +92,6 @@ class PuntuarcompañerosController extends Controller
     public function updateAutonomía_e_iniciativap(Request $request,$mote, $codigo,$puntosenv,$id_usuario){//Actualiza la puntuacion de la autonomia e iniciativa
         //id_alumno->es la id del alumno a puntuar
         //id_puntuador-> es el alumno que puntua a id_alumno
-
         $primero="SELECT  users.mote, unite_rankings.codigo
                 FROM unite_rankings, users
                 WHERE users.id = unite_rankings.id_usuario
@@ -116,7 +124,7 @@ class PuntuarcompañerosController extends Controller
             }
         }
     }
-    public function updateGestión_emocionalp(Request $request,$mote, $codigo,$puntosenv){//Actualiza la puntuacion de la gestion emocional
+    public function updateGestión_emocionalp(Request $request,$mote, $codigo,$puntosenv, $id_usuario){//Actualiza la puntuacion de la gestion emocional
         //id_alumno->es la id del alumno a puntuar
         //id_puntuador-> es el alumno que puntua a id_alumno
 
@@ -143,7 +151,7 @@ class PuntuarcompañerosController extends Controller
                 $updatesql="UPDATE unite_rankings
                             SET Gestión_emocional = '$puntosenv'
                             WHERE codigo = '$codigo'
-                            AND id_usuario=1;";
+                            AND id_usuario=$id_usuario;";
                 $consul2 = DB::select($updatesql);
                 return response()->json([
                     "status" => 1,
