@@ -15,7 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_ranking')->references('id')->on('create_rankings');
             $table->string('codigo');
-            $table->string('puntos')->default(0);
+            $table->integer('Responsabilidad')->nullable();
+            $table->integer('Cooperación')->nullable();
+            $table->integer('Autonomía_e_iniciativa')->nullable();
+            $table->integer('Gestión_emocional')->nullable();
+            $table->integer('abilidades_de_pensamiento')->nullable();
+            $table->string('puntos_semanales');
             $table->foreignId('id_usuario')->references('id')->on('users');
         });
     }
