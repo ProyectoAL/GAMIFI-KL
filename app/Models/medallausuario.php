@@ -12,6 +12,10 @@ class medallausuario extends Model
     protected $fillable = [
         'id_usuario',
         'id_ranking',
-        'id_medalla'
+        'Responsabilidad',
+        'Cooperación',
+        'Autonomía e iniciativa',
+        'Gestión emocional',
+        'Habilidades de pensamiento'
     ];
 }

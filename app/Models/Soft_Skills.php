@@ -11,6 +11,7 @@ class Soft_Skills extends Model
     public $timestamps=false;
     protected $fillable = [
         'nivel',
+        'puntosr',
         'rango',
         'medalla'
     ];

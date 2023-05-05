@@ -4,18 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UniteRanking extends Model
 {
-    use HasFactory, SoftDeletes;
-    public $timestamps = true;
+    use HasFactory;
+    public $timestamps=false;
     protected $fillable = [
         'id_ranking',
         'codigo',
-        'puntos',
+        'Responsabilidad',
+        'Cooperación',
+        'Autonomía_e_iniciativa',
+        'Gestión_emocional',
+        'abilidades_de_pensamiento',
+        'puntos_semanales',
         'id_usuario'
     ];
-
-    protected $dates = ['deleted_at'];
 }
