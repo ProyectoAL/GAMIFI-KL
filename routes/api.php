@@ -72,6 +72,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete("deletemedallausuario",[MedallausuarioController::class,"deletemedallausuario"]);
     
     
+    Route::post("indexusermenos/{mote},{codigo}",[PuntuarcompañerosController::class,"indexusermenos"]);
     Route::put("updateResponsabilidadp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateResponsabilidadp"]);
     Route::put("updateCooperaciónp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateCooperaciónp"]);
     Route::put("updateAutonomía_e_iniciativap/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateAutonomía_e_iniciativap"]);
