@@ -8,21 +8,43 @@ use Illuminate\Support\Facades\DB;
 
 class SoftSkillsController extends Controller
 {
-    public function indexsoftskill(){
-        $Soft_Skills=Soft_Skills::all();
+    public function indexsoftskill()
+    {
+        $Soft_Skills = Soft_Skills::all();
         return $Soft_Skills;
     }
-    public function createsoftskill(Request $request){//Poder crear las medallas de los softskill
+
+
+    public function nombresoftskills()
+    {
+        $sql = "SELECT DISTINCT rango FROM soft__skills;";
+
+        $SoftSkill = DB::select($sql);
+
+        return $SoftSkill;
+    }
+
+    public function fotos($niveles)
+    {
+        $sql = "SELECT medalla, rango FROM soft__skills 
+        WHERE nivel = $niveles;";
+
+        $SoftSkill = DB::select($sql);
+
+        return $SoftSkill;
+    }
+
+    public function createsoftskill(Request $request)
+    { //Poder crear las medallas de los softskill
         $request->validate([
             'rango' => 'Required',
-            'puntosr'=>'Required',
             'medalla' => ' image',
-            ]);
-        $createsoftskill= new Soft_Skills();
-        $createsoftskill->nivel=$request->nivel;
-        $createsoftskill->puntosr=$request->puntosr;
-        $createsoftskill->rango= $request->rango;
-        $createsoftskill->medalla= $request->medalla;
+        ]);
+
+        $createsoftskill = new Soft_Skills();
+        $createsoftskill->nivel = $request->nivel;
+        $createsoftskill->rango = $request->rango;
+        $createsoftskill->medalla = $request->medalla;
         $createsoftskill->save();
         return response()->json([
             "status" => 1,
@@ -30,11 +52,10 @@ class SoftSkillsController extends Controller
             "value" => $createsoftskill
         ]);
     }
-    public function updatesoftskill(Request $request,$id){
+    public function updatesoftskill(Request $request, $id)
+    {
 
         $request->validate([
-            'nivel'=>'Required',
-            'puntosr'=>'Required',
             'rango' => 'Required',
             'medalla' => 'image',
         ]);
@@ -42,10 +63,8 @@ class SoftSkillsController extends Controller
         $user_id = $id;
         if (Soft_Skills::where(["id" => $user_id])->exists()) {
             $createsoftskill = Soft_Skills::find($user_id);
-            $createsoftskill->nivel=$request->nivel;
-            $createsoftskill->puntosr=$request->puntosr;
-            $createsoftskill->rango=$request->rango;
-            $createsoftskill->medalla=$request->medalla;
+            $createsoftskill->rango = $request->rango;
+            $createsoftskill->medalla = $request->medalla;
             $createsoftskill->save();
             return response()->json([
                 "status" => 1,
@@ -59,10 +78,11 @@ class SoftSkillsController extends Controller
             ]);
         }
     }
-    public function deletesoftskill(Request $request){
+    public function deletesoftskill(Request $request)
+    {
         $deletesoftskill = DB::table('soft__skills')
-        ->where('id', '=', $request->id)
-        ->delete();
+            ->where('id', '=', $request->id)
+            ->delete();
         return response()->json([
             "status" => 0,
             'message' => 'Soft_Skills deleted successfully',

@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CreateRankingController;
-use App\Http\Controllers\RankingController;
 use App\Http\Controllers\UniteRankingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticaController;
 use App\Http\Controllers\EntregaController;
+use App\Http\Controllers\SoftSkillsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -59,23 +59,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::put("actualizarnota/{id}", [EntregaController::class, "actualizarnota"]);
     Route::delete("deleteentrega/{id}", [EntregaController::class, "deleteentrega"]);
 
-
-    Route::post("indexsoftskill",[SoftSkillsController::class,"indexsoftskill"]);
-    Route::post("createsoftskill",[SoftSkillsController::class,"createsoftskill"]);
-    Route::put("updatesoftskill/{id}",[SoftSkillsController::class,"updatesoftskill"]);
-    Route::delete("deletesoftskill/{id}",[SoftSkillsController::class,"deletesoftskill"]);
-    
-    
-    Route::post("indexallmedaalauser",[MedallausuarioController::class,"indexallmedaalauser"]);
-    Route::post("createmedallauser",[MedallausuarioController::class,"createmedallauser"]);
-    Route::put("updatemedallausuario",[MedallausuarioController::class,"updatemedallausuario"]);
-    Route::delete("deletemedallausuario",[MedallausuarioController::class,"deletemedallausuario"]);
-    
-    
-    Route::post("indexusermenos/{mote},{codigo}",[PuntuarcompañerosController::class,"indexusermenos"]);
-    Route::put("updateResponsabilidadp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateResponsabilidadp"]);
-    Route::put("updateCooperaciónp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateCooperaciónp"]);
-    Route::put("updateAutonomía_e_iniciativap/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateAutonomía_e_iniciativap"]);
-    Route::put("updateGestión_emocionalp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateGestión_emocionalp"]);
-    Route::put("updateabilidades_de_pensamientop/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateabilidades_de_pensamientop"]);
+    Route::get("nombresoftskills", [SoftSkillsController::class, "nombresoftskills"]);
+    Route::get("fotos/{nivel},{rango}", [SoftSkillsController::class, "fotos"]);
+    Route::post("indexsoftskill", [SoftSkillsController::class, "indexsoftskill"]);
+    Route::post("createsoftskill", [SoftSkillsController::class, "createsoftskill"]);
+    Route::put("updatesoftskill/{id}", [SoftSkillsController::class, "updatesoftskill"]);
+    Route::delete("deletesoftskill/{id}", [SoftSkillsController::class, "deletesoftskill"]);
 });
