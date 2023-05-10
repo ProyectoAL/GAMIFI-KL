@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticaController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\SoftSkillsController;
+use App\Http\Controllers\MedallausuarioController;
 
 
 /*
@@ -65,18 +66,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("createsoftskill", [SoftSkillsController::class, "createsoftskill"]);
     Route::put("updatesoftskill/{id}", [SoftSkillsController::class, "updatesoftskill"]);
     Route::delete("deletesoftskill/{id}", [SoftSkillsController::class, "deletesoftskill"]);
-    
-    Route::post("selectResponsabilidad/{puntos}",[MedallausuarioController::class,"selectResponsabilidad"]);
-    Route::post("selectCooperación/{puntos}",[MedallausuarioController::class,"selectCooperación"]);
-    Route::post("selectAutonomía_e_iniciativa/{puntos}",[MedallausuarioController::class,"selectAutonomía_e_iniciativa"]);
-    Route::post("selectGestión_emocional/{puntos}",[MedallausuarioController::class,"selectGestión_emocional"]);
-    Route::post("selectHabilidades_de_pensamiento/{puntos}",[MedallausuarioController::class,"selectHabilidades_de_pensamiento"]);
-    
-    
-    Route::post("indexusermenos/{mote},{codigo}",[PuntuarcompañerosController::class,"indexusermenos"]);
-    Route::put("updateResponsabilidadp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateResponsabilidadp"]);
-    Route::put("updateCooperaciónp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateCooperaciónp"]);
-    Route::put("updateAutonomía_e_iniciativap/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateAutonomía_e_iniciativap"]);
-    Route::put("updateGestión_emocionalp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateGestión_emocionalp"]);
-    Route::put("updateabilidades_de_pensamientop/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateabilidades_de_pensamientop"]);
+
+    Route::get("selectResponsabilidad/{puntos}", [MedallausuarioController::class, "selectResponsabilidad"]);
+    Route::get("selectCooperacion/{puntos}", [MedallausuarioController::class, "selectCooperacion"]);
+    Route::get("selectAutonomia_e_iniciativa/{puntos}", [MedallausuarioController::class, "selectAutonomia_e_iniciativa"]);
+    Route::get("selectGestion_emocional/{puntos}", [MedallausuarioController::class, "selectGestion_emocional"]);
+    Route::get("selectHabilidades_de_pensamiento/{puntos}", [MedallausuarioController::class, "selectHabilidades_de_pensamiento"]);
 });
