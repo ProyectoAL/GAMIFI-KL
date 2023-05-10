@@ -22,7 +22,7 @@ class UniteRankingController extends Controller
     public function indexall($id)
     {
         $sql2 = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos_semanales, unite_rankings.codigo, unite_rankings.id_ranking,
-        unite_rankings.Responsabilidad, unite_rankings.Cooperación, unite_rankings.Autonomía_e_iniciativa, unite_rankings.Gestión_emocional, unite_rankings.abilidades_de_pensamiento
+        unite_rankings.Responsabilidad, unite_rankings.Cooperacion, unite_rankings.Autonomia_e_iniciativa, unite_rankings.Gestion_emocional, unite_rankings.abilidades_de_pensamiento
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
                 AND unite_rankings.id_ranking= $id ORDER BY puntos_semanales DESC;";

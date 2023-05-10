@@ -13,9 +13,9 @@ class UniteRanking extends Model
         'id_ranking',
         'codigo',
         'Responsabilidad',
-        'Cooperación',
-        'Autonomía_e_iniciativa',
-        'Gestión_emocional',
+        'Cooperacion',
+        'Autonomia_e_iniciativa',
+        'Gestion_emocional',
         'abilidades_de_pensamiento',
         'puntos_semanales',
         'id_usuario'

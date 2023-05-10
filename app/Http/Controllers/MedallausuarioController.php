@@ -11,9 +11,10 @@ class MedallausuarioController extends Controller
 {
     public function selectResponsabilidad(Request $request, $puntos)
     { //actualizar las medallas de los usuarios
+
         $puntosresponsabilidad = $puntos;
         if ($puntosresponsabilidad == 0 || $puntosresponsabilidad > 0 && $puntosresponsabilidad < 1000) {
-            $sql0 = "SELECT soft__skills.medalla
+            $sql0 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr BETWEEN 0 and 999;";
@@ -25,7 +26,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul0
             ]);
         } else if ($puntosresponsabilidad == 1000 || $puntosresponsabilidad > 1000 && $puntosresponsabilidad < 2000) {
-            $sql1 = "SELECT soft__skills.medalla
+            $sql1 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr BETWEEN 1000 and 1999;";
@@ -37,7 +38,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul1
             ]);
         } else if ($puntosresponsabilidad == 2000 || $puntosresponsabilidad > 2000 && $puntosresponsabilidad < 4000) {
-            $sql2 = "SELECT soft__skills.medalla
+            $sql2 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr BETWEEN 2000 and 3999;";
@@ -49,7 +50,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul2
             ]);
         } else if ($puntosresponsabilidad == 4000 || $puntosresponsabilidad > 4000 && $puntosresponsabilidad < 7000) {
-            $sql3 = "SELECT soft__skills.medalla
+            $sql3 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr BETWEEN 4000 and 6999;";
@@ -61,7 +62,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul3
             ]);
         } else if ($puntosresponsabilidad == 7000 || $puntosresponsabilidad > 7000 && $puntosresponsabilidad < 10000) {
-            $sql4 = "SELECT soft__skills.medalla
+            $sql4 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr BETWEEN 7000 and 9999;";
@@ -73,7 +74,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul4
             ]);
         } else if ($puntosresponsabilidad == 10000 || $puntosresponsabilidad > 10000) {
-            $sql5 = "SELECT soft__skills.medalla
+            $sql5 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
                     FROM soft__skills
                     WHERE soft__skills.rango = 'Responsabilidad'
                     AND soft__skills.puntosr>=10000;";
@@ -90,7 +91,7 @@ class MedallausuarioController extends Controller
     { //actualizar las medallas de los usuarios
         $puntoscooperacion = $puntos;
         if ($puntoscooperacion == 0 || $puntoscooperacion > 0 && $puntoscooperacion < 1000) {
-            $sql0 = "SELECT soft__skills.medalla
+            $sql0 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr BETWEEN 0 and 999;";
@@ -102,7 +103,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul0
             ]);
         } else if ($puntoscooperacion == 1000 || $puntoscooperacion > 1000 && $puntoscooperacion < 2000) {
-            $sql1 = "SELECT soft__skills.medalla
+            $sql1 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr BETWEEN 1000 and 1999;";
@@ -114,7 +115,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul1
             ]);
         } else if ($puntoscooperacion == 2000 || $puntoscooperacion > 2000 && $puntoscooperacion < 4000) {
-            $sql2 = "SELECT soft__skills.medalla
+            $sql2 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr BETWEEN 2000 and 3999;";
@@ -126,7 +127,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul2
             ]);
         } else if ($puntoscooperacion == 4000 || $puntoscooperacion > 4000 && $puntoscooperacion < 7000) {
-            $sql3 = "SELECT soft__skills.medalla
+            $sql3 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr BETWEEN 4000 and 6999;";
@@ -138,7 +139,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul3
             ]);
         } else if ($puntoscooperacion == 7000 || $puntoscooperacion > 7000 && $puntoscooperacion < 10000) {
-            $sql4 = "SELECT soft__skills.medalla
+            $sql4 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr BETWEEN 7000 and 9999;";
@@ -150,7 +151,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul4
             ]);
         } else if ($puntoscooperacion == 10000 || $puntoscooperacion > 10000) {
-            $sql5 = "SELECT soft__skills.medalla
+            $sql5 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Cooperación'
             AND soft__skills.puntosr>=10000;";
@@ -167,7 +168,7 @@ class MedallausuarioController extends Controller
     { //actualizar las medallas de los usuarios
         $puntosautonomía_e_iniciativa = $puntos;
         if ($puntosautonomía_e_iniciativa == 0 || $puntosautonomía_e_iniciativa > 0 && $puntosautonomía_e_iniciativa < 1000) {
-            $sql0 = "SELECT soft__skills.medalla
+            $sql0 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr BETWEEN 0 and 999;";
@@ -179,7 +180,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul0
             ]);
         } else if ($puntosautonomía_e_iniciativa == 1000 || $puntosautonomía_e_iniciativa > 1000 && $puntosautonomía_e_iniciativa < 2000) {
-            $sql1 = "SELECT soft__skills.medalla
+            $sql1 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr BETWEEN 1000 and 1999;";
@@ -191,7 +192,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul1
             ]);
         } else if ($puntosautonomía_e_iniciativa == 2000 || $puntosautonomía_e_iniciativa > 2000 && $puntosautonomía_e_iniciativa < 4000) {
-            $sql2 = "SELECT soft__skills.medalla
+            $sql2 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr BETWEEN 2000 and 3999;";
@@ -203,7 +204,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul2
             ]);
         } else if ($puntosautonomía_e_iniciativa == 4000 || $puntosautonomía_e_iniciativa > 4000 && $puntosautonomía_e_iniciativa < 7000) {
-            $sql3 = "SELECT soft__skills.medalla
+            $sql3 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr BETWEEN 4000 and 6999;";
@@ -215,7 +216,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul3
             ]);
         } else if ($puntosautonomía_e_iniciativa == 7000 || $puntosautonomía_e_iniciativa > 7000 && $puntosautonomía_e_iniciativa < 10000) {
-            $sql4 = "SELECT soft__skills.medalla
+            $sql4 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr BETWEEN 7000 and 9999;";
@@ -227,7 +228,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul4
             ]);
         } else if ($puntosautonomía_e_iniciativa == 10000 || $puntosautonomía_e_iniciativa > 10000) {
-            $sql5 = "SELECT soft__skills.medalla
+            $sql5 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Autonomía e iniciativa'
             AND soft__skills.puntosr>=10000;";
@@ -244,7 +245,7 @@ class MedallausuarioController extends Controller
     { //actualizar las medallas de los usuarios
         $puntosegstión_emocional = $puntos;
         if ($puntosegstión_emocional == 0 || $puntosegstión_emocional > 0 && $puntosegstión_emocional < 1000) {
-            $sql0 = "SELECT soft__skills.medalla
+            $sql0 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr BETWEEN 0 and 999;";
@@ -256,7 +257,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul0
             ]);
         } else if ($puntosegstión_emocional == 1000 || $puntosegstión_emocional > 1000 && $puntosegstión_emocional < 2000) {
-            $sql1 = "SELECT soft__skills.medalla
+            $sql1 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr BETWEEN 1000 and 1999;";
@@ -268,7 +269,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul1
             ]);
         } else if ($puntosegstión_emocional == 2000 || $puntosegstión_emocional > 2000 && $puntosegstión_emocional < 4000) {
-            $sql2 = "SELECT soft__skills.medalla
+            $sql2 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr BETWEEN 2000 and 3999;";
@@ -280,7 +281,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul2
             ]);
         } else if ($puntosegstión_emocional == 4000 || $puntosegstión_emocional > 4000 && $puntosegstión_emocional < 7000) {
-            $sql3 = "SELECT soft__skills.medalla
+            $sql3 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr BETWEEN 4000 and 6999;";
@@ -292,7 +293,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul3
             ]);
         } else if ($puntosegstión_emocional == 7000 || $puntosegstión_emocional > 7000 && $puntosegstión_emocional < 10000) {
-            $sql4 = "SELECT soft__skills.medalla
+            $sql4 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr BETWEEN 7000 and 9999;";
@@ -304,7 +305,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul4
             ]);
         } else if ($puntosegstión_emocional == 10000 || $puntosegstión_emocional > 10000) {
-            $sql5 = "SELECT soft__skills.medalla
+            $sql5 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Gestión emocional'
             AND soft__skills.puntosr>=10000;";
@@ -321,7 +322,7 @@ class MedallausuarioController extends Controller
     { //actualizar las medallas de los usuarios
         $puntoshabilidades_de_pensamiento = $puntos;
         if ($puntoshabilidades_de_pensamiento == 0 || $puntoshabilidades_de_pensamiento > 0 && $puntoshabilidades_de_pensamiento < 1000) {
-            $sql0 = "SELECT soft__skills.medalla
+            $sql0 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr BETWEEN 0 and 999;";
@@ -333,7 +334,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul0
             ]);
         } else if ($puntoshabilidades_de_pensamiento == 1000 || $puntoshabilidades_de_pensamiento > 1000 && $puntoshabilidades_de_pensamiento < 2000) {
-            $sql1 = "SELECT soft__skills.medalla
+            $sql1 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr BETWEEN 1000 and 1999;";
@@ -345,7 +346,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul1
             ]);
         } else if ($puntoshabilidades_de_pensamiento == 2000 || $puntoshabilidades_de_pensamiento > 2000 && $puntoshabilidades_de_pensamiento < 4000) {
-            $sql2 = "SELECT soft__skills.medalla
+            $sql2 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr BETWEEN 2000 and 3999;";
@@ -357,7 +358,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul2
             ]);
         } else if ($puntoshabilidades_de_pensamiento == 4000 || $puntoshabilidades_de_pensamiento > 4000 && $puntoshabilidades_de_pensamiento < 7000) {
-            $sql3 = "SELECT soft__skills.medalla
+            $sql3 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr BETWEEN 4000 and 6999;";
@@ -369,7 +370,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul3
             ]);
         } else if ($puntoshabilidades_de_pensamiento == 7000 || $puntoshabilidades_de_pensamiento > 7000 && $puntoshabilidades_de_pensamiento < 10000) {
-            $sql4 = "SELECT soft__skills.medalla
+            $sql4 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr BETWEEN 7000 and 9999;";
@@ -381,7 +382,7 @@ class MedallausuarioController extends Controller
                 "value" => $consul4
             ]);
         } else if ($puntoshabilidades_de_pensamiento == 10000 || $puntoshabilidades_de_pensamiento > 10000) {
-            $sql5 = "SELECT soft__skills.medalla
+            $sql5 = "SELECT soft__skills.medalla, soft__skills.rango, soft__skills.nivel
             FROM soft__skills
             WHERE soft__skills.rango = 'Habilidades de pensamiento'
             AND soft__skills.puntosr>=10000;";

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('id_ranking')->references('id')->on('create_rankings');
             $table->string('codigo');
             $table->integer('Responsabilidad')->default(0);
-            $table->integer('Cooperación')->default(0);
-            $table->integer('Autonomía_e_iniciativa')->default(0);
-            $table->integer('Gestión_emocional')->default(0);
+            $table->integer('Cooperacion')->default(0);
+            $table->integer('Autonomia_e_iniciativa')->default(0);
+            $table->integer('Gestion_emocional')->default(0);
             $table->integer('abilidades_de_pensamiento')->default(0);
             $table->integer('puntos_semanales')->default(0);
             $table->foreignId('id_usuario')->references('id')->on('users');
