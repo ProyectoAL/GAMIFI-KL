@@ -102,12 +102,18 @@ class historialController extends Controller
 
         return $deleteevaluacion;
     }
-        public function filtro($dato){
-        $sql = "SELECT id, id_ranking, alumno_evaluador, alumno_evaluado, puntos_dados, soft_skill, created_at, updated_at
-                FROM historials
-                WHERE alumno_evaluador LIKE '%$dato%' OR alumno_evaluado LIKE '%$dato%' OR puntos_dados LIKE '%$dato%' OR soft_skill LIKE '%$dato%' OR created_at LIKE '%$dato%';";
+
+    public function filtro($dato)
+    {
+
+        $sql = "SELECT id, id_ranking, alumno_evaluador, alumno_evaluado, puntos_dados, soft_skill, created_at, updated_at 
+        FROM historials 
+        WHERE alumno_evaluador LIKE '%$dato%' 
+            OR alumno_evaluado LIKE '%$dato%' 
+            OR puntos_dados LIKE '%$dato%' 
+            OR soft_skill LIKE '%$dato%' 
+            OR created_at LIKE '%$dato%';";
         $consul = DB::select($sql);
         return $consul;
-
     }
 }
