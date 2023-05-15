@@ -29,6 +29,32 @@ class UniteRankingController extends Controller
         $viewranking = DB::select($sql2);
         return $viewranking;
     }
+
+    public function indexespecifico($id_usuario, $id_ranking)
+    {
+        $sql2 = "SELECT unite_rankings.id_usuario, unite_rankings.puntos_semanales, unite_rankings.codigo, unite_rankings.id_ranking,
+        unite_rankings.Responsabilidad, unite_rankings.Cooperacion, unite_rankings.Autonomia_e_iniciativa, unite_rankings.Gestion_emocional, unite_rankings.abilidades_de_pensamiento
+                FROM unite_rankings
+                WHERE unite_rankings.id_usuario != $id_usuario
+                AND unite_rankings.id_ranking = $id_ranking;";
+        $viewranking = DB::select($sql2);
+        return $viewranking;
+    }
+
+    public function motealumnos($id_usuario, $id_ranking)
+    {
+        $sql = "SELECT unite_rankings.id_usuario, users.mote, users.name, users.lastname, unite_rankings.puntos_semanales, unite_rankings.codigo, unite_rankings.id_ranking,
+        unite_rankings.Responsabilidad, unite_rankings.Cooperacion, unite_rankings.Autonomia_e_iniciativa, unite_rankings.Gestion_emocional, unite_rankings.abilidades_de_pensamiento
+                FROM users, unite_rankings
+                WHERE users.id = $id_usuario
+                AND unite_rankings.id_ranking= $id_ranking
+                AND unite_rankings.id_usuario = $id_usuario;";
+
+        $viewranking = DB::select($sql);
+
+        return $viewranking;
+    }
+
     //falta por terminar
     public function unitedranking(Request $request)
     {
@@ -79,6 +105,24 @@ class UniteRankingController extends Controller
                 'message' => 'Code not found',
             ]);
         }
+    }
+
+    public function updatepuntosmedallas(Request $request)
+    {
+
+        $updateRanking = new CreateRanking();
+
+        $sql = "UPDATE unite_rankings
+                SET $request->rango = $request->rango + $request->puntos
+                WHERE unite_rankings.id_usuario = $request->id_usuario AND 
+                unite_rankings.id_ranking=$request->id_ranking;";
+
+        $updateRanking = DB::select($sql);
+        return response()->json([
+            "status" => 1,
+            "message" => "Actualizado correctamente",
+            "value" => $updateRanking
+        ]);
     }
 
     public function deleteuser(Request $request)

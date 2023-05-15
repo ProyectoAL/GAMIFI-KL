@@ -9,6 +9,7 @@ use App\Http\Controllers\PracticaController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\SoftSkillsController;
 use App\Http\Controllers\MedallausuarioController;
+use App\Http\Controllers\historialController;
 
 
 /*
@@ -43,7 +44,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::get("indexnombreranking/{id}", [UniteRankingController::class, "indexnombreranking"]);
     Route::get("indexall/{id}", [UniteRankingController::class, "indexall"]);
+    Route::get("indexespecifico/{id_usuario},{id_ranking}", [UniteRankingController::class, "indexespecifico"]);
+    Route::get("motealumnos/{id_usuario},{id_ranking}", [UniteRankingController::class, "motealumnos"]);
     Route::post("unitedranking/{mote},{codigo}", [UniteRankingController::class, "unitedranking"]);
+    Route::put("updatepuntosmedallas", [UniteRankingController::class, "updatepuntosmedallas"]);
     Route::post("deleteuser/", [UniteRankingController::class, "deleteuser"]);
 
 
@@ -72,4 +76,12 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("selectAutonomia_e_iniciativa/{puntos}", [MedallausuarioController::class, "selectAutonomia_e_iniciativa"]);
     Route::get("selectGestion_emocional/{puntos}", [MedallausuarioController::class, "selectGestion_emocional"]);
     Route::get("selectHabilidades_de_pensamiento/{puntos}", [MedallausuarioController::class, "selectHabilidades_de_pensamiento"]);
+
+    Route::get("indexhistorial/{id_ranking}", [historialController::class, "indexhistorial"]);
+    Route::get("indexalumno_evaluador/{alumno_evaluador}", [historialController::class, "indexalumno_evaluador"]);
+    Route::get("indexalumno_evaluado/{alumno_evaluado}", [historialController::class, "indexalumno_evaluado"]);
+    Route::post("createhistorial", [historialController::class, "createhistorial"]);
+    Route::get("selectpuntos/{id}", [historialController::class, "selectpuntos"]);
+    Route::get("hacerresta/{puntos},{rango},{id_usuario},{id_ranking}", [historialController::class, "hacerresta"]);
+    Route::delete("deleteevaluacion/{id}", [historialController::class, "deleteevaluacion"]);
 });
