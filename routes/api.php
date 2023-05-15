@@ -84,4 +84,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("selectpuntos/{id}", [historialController::class, "selectpuntos"]);
     Route::put("hacerresta", [historialController::class, "hacerresta"]);
     Route::delete("deleteevaluacion/{id}", [historialController::class, "deleteevaluacion"]);
+    Route::get("filtro/{dato}", [historialController::class, "filtro"]);
+
+   
 });
