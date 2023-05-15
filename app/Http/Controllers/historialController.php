@@ -68,23 +68,23 @@ class historialController extends Controller
 
     public function selectpuntos($id)
     {
-        $sql1 = "SELECT puntos_dados
+        $sql = "SELECT puntos_dados
         FROM historials
         WHERE id = $id;";
 
-        $restarevaluacion = DB::select($sql1);
+        $restarevaluacion = DB::select($sql);
 
         return $restarevaluacion;
     }
 
-    public function hacerresta($puntos, $rango, $id_usuario, $id_ranking)
+    public function hacerresta(Request $request)
     {
-        $sql2 = "UPDATE unite_rankings
-        SET $rango = $rango - $puntos
-        WHERE id_usuario = $id_usuario 
-        AND id_ranking=$id_ranking;";
+        $sql = "UPDATE unite_rankings
+        SET $request->rango = $request->rango - $request->puntos
+        WHERE unite_rankings.id_usuario = $request->id_usuario 
+        AND unite_rankings.id_ranking=$request->id_ranking;";
 
-        $updateevaluacion = DB::select($sql2);
+        $updateevaluacion = DB::select($sql);
 
         return response()->json([
             "status" => 0,

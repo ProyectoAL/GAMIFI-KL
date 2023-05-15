@@ -82,6 +82,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("indexalumno_evaluado/{alumno_evaluado}", [historialController::class, "indexalumno_evaluado"]);
     Route::post("createhistorial", [historialController::class, "createhistorial"]);
     Route::get("selectpuntos/{id}", [historialController::class, "selectpuntos"]);
-    Route::get("hacerresta/{puntos},{rango},{id_usuario},{id_ranking}", [historialController::class, "hacerresta"]);
+    Route::put("hacerresta", [historialController::class, "hacerresta"]);
     Route::delete("deleteevaluacion/{id}", [historialController::class, "deleteevaluacion"]);
 });
