@@ -25,7 +25,7 @@ class UniteRankingController extends Controller
         unite_rankings.Responsabilidad, unite_rankings.Cooperacion, unite_rankings.Autonomia_e_iniciativa, unite_rankings.Gestion_emocional, unite_rankings.abilidades_de_pensamiento
                 FROM users, unite_rankings
                 WHERE users.id = unite_rankings.id_usuario
-                AND unite_rankings.id_ranking= $id ORDER BY puntos_semanales DESC;";
+                AND unite_rankings.id_ranking= $id ORDER BY mote_usuario ASC;";
         $viewranking = DB::select($sql2);
         return $viewranking;
     }

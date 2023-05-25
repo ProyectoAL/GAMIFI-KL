@@ -23,7 +23,7 @@ class CreateRankingController extends Controller
     public function index($id)
     {
         //$CreateRanking=CreateRanking::all();
-        $sql = "SELECT id, nombre
+        $sql = "SELECT id, nombre, codigo
                 FROM create_rankings
                 WHERE id= $id;";
         $CreateRanking = DB::select($sql);
