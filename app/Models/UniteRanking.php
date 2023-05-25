@@ -18,7 +18,8 @@ class UniteRanking extends Model
         'Gestion_emocional',
         'abilidades_de_pensamiento',
         'puntos_semanales',
-        'id_usuario'
+        'id_usuario',
+        'mote_usuario'
     ];
 
     protected $dates = ['deleted_at'];

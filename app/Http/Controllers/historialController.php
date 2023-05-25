@@ -20,29 +20,6 @@ class historialController extends Controller
         return $historial;
     }
 
-    public function indexalumno_evaluador($alumno_evaluador)
-    {
-        $sql = "SELECT mote
-         FROM users 
-         WHERE id = $alumno_evaluador;";
-
-        $historial = DB::select($sql);
-
-        return $historial;
-    }
-
-
-    public function indexalumno_evaluado($alumno_evaluado)
-    {
-        $sql = "SELECT mote
-        FROM users 
-        WHERE id = $alumno_evaluado;";
-
-        $historial = DB::select($sql);
-
-        return $historial;
-    }
-
     public function createhistorial(Request $request)
     {
         $request->validate([
@@ -107,7 +84,7 @@ class historialController extends Controller
     {
 
         $sql = "SELECT id, id_ranking, alumno_evaluador, alumno_evaluado, puntos_dados, soft_skill, created_at, updated_at 
-        FROM historials 
+        FROM historials
         WHERE alumno_evaluador LIKE '%$dato%' 
             OR alumno_evaluado LIKE '%$dato%' 
             OR puntos_dados LIKE '%$dato%' 

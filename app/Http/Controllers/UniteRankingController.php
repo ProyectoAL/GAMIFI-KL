@@ -61,6 +61,7 @@ class UniteRankingController extends Controller
         $request->validate([
             'codigo' => 'required',
             'id_usuario' => 'required',
+            'mote' => 'required'
         ]);
 
         $createRanking = CreateRanking::where('codigo', $request->codigo)->first();
@@ -69,6 +70,7 @@ class UniteRankingController extends Controller
         $UniteRanking->id_ranking = $createRanking->id;
         $UniteRanking->codigo = $request->codigo;
         $UniteRanking->id_usuario = $request->id_usuario;
+        $UniteRanking->mote_usuario = $request->mote;
 
         $sql = "SELECT codigo
                 FROM create_rankings
@@ -114,8 +116,8 @@ class UniteRankingController extends Controller
 
         $sql = "UPDATE unite_rankings
                 SET $request->rango = $request->rango + $request->puntos
-                WHERE unite_rankings.id_usuario = $request->id_usuario AND 
-                unite_rankings.id_ranking=$request->id_ranking;";
+                WHERE mote_usuario = '$request->mote_usuario' AND 
+                id_ranking=$request->id_ranking;";
 
         $updateRanking = DB::select($sql);
         return response()->json([
@@ -145,36 +147,5 @@ class UniteRankingController extends Controller
             "value1" => $deleteentrega,
             "value2" => $deleteusuario
         ]);
-    }
-
-
-    public function actualizarPuntosSemanales()
-    {
-        $fechaActual = date('Y-m-d');
-        $fechaInicioSemana = date('Y-m-d', strtotime('monday this week'));
-
-        $ranking = DB::table('unite_rankings')->distinct('id_ranking')->pluck('id_ranking');
-
-        $usuarios = DB::table('unite_rankings')->distinct('id_usuario')->pluck('id_usuario');
-
-        $codigo = DB::table('unite_rankings')->distinct('codigo')->pluck('codigo');
-
-        foreach ($usuarios as $usuario) {
-            $puntosSemanaActual = DB::table('unite_rankings')
-                ->where('id_usuario', $usuario)
-                ->where('created_at', '>=', $fechaInicioSemana)
-                ->sum('puntos_semanales');
-
-            $puntosFaltantes = max(0, 1000 - $puntosSemanaActual);
-
-            DB::table('unite_rankings')->insert([
-                'id_ranking' => $ranking,
-                'codigo' => $codigo,
-                'puntos_semanales' => $puntosFaltantes,
-                'id_usuario' => $usuario,
-                'created_at' => $fechaActual,
-                'updated_at' => $fechaActual
-            ]);
-        }
     }
 }

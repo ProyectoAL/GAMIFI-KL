@@ -28,6 +28,6 @@ class testtask extends Command
     public function handle(Schedule $schedule): void
     {
         $totalUsers = DB::table('unite_rankings')
-                ->update(['puntos_semanales' => '1000']);
+                ->update(['puntos_semanales' => 1000]);
     }
 }

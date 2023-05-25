@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('abilidades_de_pensamiento')->default(0);
             $table->integer('puntos_semanales')->default(0);
             $table->foreignId('id_usuario')->references('id')->on('users');
+            $table->string('mote_usuario');
             $table->timestamps();
         });
     }

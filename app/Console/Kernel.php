@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:testtask')->weeklyOn(1, '8:00');
+        // $schedule->command('app:testtask')->weeklyOn(1, '8:00');
+        $schedule->command('app:testtask')->everyMinute();
     }
 
     /**
