@@ -196,4 +196,12 @@ class PuntuarcompañerosController extends Controller
             }
         }
     }
+        public function updatepuntos (Request $request,$id,$puntosactual,$puntosdados){
+        $resultado=$puntosactual-$puntosdados;
+        $sql = "UPDATE `unite_rankings`
+                SET puntos_semanales = $request->$resultado
+                WHERE `unite_rankings`.`id` = $request->$id;";
+        $consul2 = DB::select($sql);
+
+    }
 }
