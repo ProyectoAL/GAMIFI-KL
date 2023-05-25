@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('historials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_ranking')->references('id')->on('create_rankings');
+            $table->integer('id_ranking');
             $table->string('alumno_evaluador');
             $table->string('alumno_evaluado');
             $table->integer('puntos_dados');

@@ -44,10 +44,12 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::get("indexnombreranking/{id}", [UniteRankingController::class, "indexnombreranking"]);
     Route::get("indexall/{id}", [UniteRankingController::class, "indexall"]);
+    Route::get("puntossemanalesespec/{id_usuario},{id_ranking}", [UniteRankingController::class, "puntossemanalesespec"]);
     Route::get("indexespecifico/{id_usuario},{id_ranking}", [UniteRankingController::class, "indexespecifico"]);
     Route::get("motealumnos/{id_usuario},{id_ranking}", [UniteRankingController::class, "motealumnos"]);
     Route::post("unitedranking/{mote},{codigo}", [UniteRankingController::class, "unitedranking"]);
     Route::put("updatepuntosmedallas", [UniteRankingController::class, "updatepuntosmedallas"]);
+    Route::put("updatepuntosemanales", [UniteRankingController::class, "updatepuntosemanales"]);
     Route::post("deleteuser/", [UniteRankingController::class, "deleteuser"]);
 
 
@@ -77,16 +79,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("selectGestion_emocional/{puntos}", [MedallausuarioController::class, "selectGestion_emocional"]);
     Route::get("selectHabilidades_de_pensamiento/{puntos}", [MedallausuarioController::class, "selectHabilidades_de_pensamiento"]);
 
-    
-    Route::post("indexusermenos/{mote},{codigo}",[PuntuarcompañerosController::class,"indexusermenos"]);
-    Route::put("updateResponsabilidadp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateResponsabilidadp"]);
-    Route::put("updateCooperaciónp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateCooperaciónp"]);
-    Route::put("updateAutonomía_e_iniciativap/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateAutonomía_e_iniciativap"]);
-    Route::put("updateGestión_emocionalp/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateGestión_emocionalp"]);
-    Route::put("updateabilidades_de_pensamientop/{mote},{codigo},{puntosenv}",[PuntuarcompañerosController::class,"updateabilidades_de_pensamientop"]);
-    Route::put("updatepuntos/{id},{puntosactual},{puntosdados}",[PuntuarcompañerosController::class,"updatepuntos"]);
-    
-    
     Route::get("indexhistorial/{id_ranking}", [historialController::class, "indexhistorial"]);
     Route::get("indexalumno_evaluador/{alumno_evaluador}", [historialController::class, "indexalumno_evaluador"]);
     Route::get("indexalumno_evaluado/{alumno_evaluado}", [historialController::class, "indexalumno_evaluado"]);

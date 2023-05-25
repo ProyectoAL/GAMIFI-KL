@@ -10,7 +10,7 @@ class EntregaController extends Controller
 {
     public function indexentrega($id)
     { //Los usuarios podran ver las practicas del ranking
-        $sql = "SELECT id, id_usuario, mote, nombre, lastname, entrega, nota, id_practicas
+        $sql = "SELECT id, id_usuario, mote, nombre, lastname, entrega, nota, id_practicas, id_ranking
         FROM entregas
         WHERE id_practicas = $id;";
         $entrega = DB::select($sql);

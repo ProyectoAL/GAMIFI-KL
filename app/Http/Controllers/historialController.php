@@ -13,7 +13,8 @@ class historialController extends Controller
     {
         $sql = "SELECT id, alumno_evaluador, alumno_evaluado, puntos_dados, soft_skill, created_at
          FROM historials 
-         WHERE id_ranking = $id_ranking;";
+         WHERE id_ranking = $id_ranking
+         ORDER BY created_at DESC;";
 
         $historial = DB::select($sql);
 
@@ -58,7 +59,7 @@ class historialController extends Controller
     {
         $sql = "UPDATE unite_rankings
         SET $request->rango = $request->rango - $request->puntos
-        WHERE unite_rankings.id_usuario = $request->id_usuario 
+        WHERE unite_rankings.mote_usuario = '$request->mote_usuario' 
         AND unite_rankings.id_ranking=$request->id_ranking;";
 
         $updateevaluacion = DB::select($sql);

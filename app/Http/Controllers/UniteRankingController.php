@@ -30,6 +30,18 @@ class UniteRankingController extends Controller
         return $viewranking;
     }
 
+    public function puntossemanalesespec($id_usuario, $id_ranking)
+    {
+        $sql = "SELECT puntos_semanales
+        FROM unite_rankings
+        WHERE id_usuario = $id_usuario 
+        AND id_ranking = $id_ranking;";
+
+        $viewpuntos = DB::select($sql);
+
+        return $viewpuntos;
+    }
+
     public function indexespecifico($id_usuario, $id_ranking)
     {
         $sql2 = "SELECT unite_rankings.id_usuario, unite_rankings.puntos_semanales, unite_rankings.codigo, unite_rankings.id_ranking,
@@ -125,6 +137,17 @@ class UniteRankingController extends Controller
             "message" => "Actualizado correctamente",
             "value" => $updateRanking
         ]);
+    }
+
+    public function updatepuntosemanales(Request $request)
+    {
+        $resultado = $request->puntosactual - $request->puntosdados;
+
+        $sql = "UPDATE unite_rankings
+        SET puntos_semanales = $resultado
+        WHERE mote_usuario = '$request->mote_usuario';";
+
+        $consul = DB::select($sql);
     }
 
     public function deleteuser(Request $request)
